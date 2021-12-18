@@ -8,8 +8,17 @@ import 'card.dart';
 class ColumnForTasks extends StatefulWidget {
   String? columnName;
   Color? columnColor;
+  IconData? columnIcon;
+  Color? headerColor;
   List<Task>? tasks;
-  ColumnForTasks({Key? key, this.columnName, this.tasks,this.columnColor}) : super(key: key);
+  ColumnForTasks(
+      {Key? key,
+      this.columnName,
+      this.tasks,
+      this.columnColor,
+      this.columnIcon,
+      this.headerColor})
+      : super(key: key);
 
   @override
   _ColumnForTasksState createState() => _ColumnForTasksState();
@@ -24,10 +33,22 @@ class _ColumnForTasksState extends State<ColumnForTasks> {
         children: [
           Card(
             child: Container(
-              child: Text(widget.columnName.toString()),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.columnName.toString(),
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Icon(widget.columnIcon)
+                ],
+              ),
               padding: const EdgeInsets.all(20),
               width: 300,
-              color: Colors.amber,
+              color: widget.headerColor,
             ),
           ),
           Column(

@@ -3,7 +3,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:todoapp/card.dart';
 import 'package:todoapp/columns.dart';
 
 import 'Task.dart';
@@ -71,10 +70,11 @@ class _BoardState extends State<Board> {
                       decoration:
                           BoxDecoration(border: Border.all(color: Colors.grey)),
                       child: ColumnForTasks(
-                        columnName: 'Todo',
-                        tasks: cols['firstColumn'],
-                        columnColor: Colors.deepOrange[50],
-                      ),
+                          columnName: 'Todo',
+                          tasks: cols['firstColumn'],
+                          columnColor: Colors.deepOrange[50],
+                          headerColor: Colors.redAccent[700],
+                          columnIcon: Icons.add_circle_outline_rounded),
                     );
                   },
                   onWillAccept: (data) {
@@ -95,10 +95,11 @@ class _BoardState extends State<Board> {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.blueGrey)),
                       child: ColumnForTasks(
-                        columnName: 'Doing',
-                        tasks: cols['secondColumn'],
-                        columnColor: Colors.pink[50],
-                      ),
+                          columnName: 'Doing',
+                          tasks: cols['secondColumn'],
+                          columnColor: Colors.pink[50],
+                          headerColor: Colors.purpleAccent[700],
+                          columnIcon: Icons.construction_rounded),
                     );
                   },
                   onWillAccept: (data) {
@@ -120,6 +121,8 @@ class _BoardState extends State<Board> {
                         columnName: 'Review',
                         tasks: cols['thirdColumn'],
                         columnColor: Colors.blue[50],
+                        headerColor: Colors.blueAccent[700],
+                        columnIcon: Icons.reviews_outlined,
                       ),
                     );
                   },
@@ -142,6 +145,8 @@ class _BoardState extends State<Board> {
                         columnName: 'Done',
                         tasks: cols['fourthColumn'],
                         columnColor: Colors.green[50],
+                        headerColor: Colors.greenAccent[700],
+                        columnIcon: Icons.done_outline_rounded,
                       ),
                     );
                   },
