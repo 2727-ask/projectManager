@@ -58,64 +58,106 @@ class _BoardState extends State<Board> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        children: [
-          DragTarget<Task>(
-            builder: (context, data, rejectedData) {
-              return ColumnForTasks(tasks: cols['firstColumn']);
-            },
-            onWillAccept: (data) {
-              print("On Accept triggered");
-              return true;
-            },
-            onAccept: (data) {
-              print("On Accept triggered");
-              addTask(
-                data: data,
-                presentCol: 'firstColumn',
-              );
-            },
+      child: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                DragTarget<Task>(
+                  builder: (context, data, rejectedData) {
+                    return Container(
+                      decoration:
+                          BoxDecoration(border: Border.all(color: Colors.grey)),
+                      child: ColumnForTasks(
+                        columnName: 'Todo',
+                        tasks: cols['firstColumn'],
+                        columnColor: Colors.deepOrange[50],
+                      ),
+                    );
+                  },
+                  onWillAccept: (data) {
+                    print("On Accept triggered");
+                    return true;
+                  },
+                  onAccept: (data) {
+                    print("On Accept triggered");
+                    addTask(
+                      data: data,
+                      presentCol: 'firstColumn',
+                    );
+                  },
+                ),
+                DragTarget<Task>(
+                  builder: (context, List data, List rejectedData) {
+                    return Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blueGrey)),
+                      child: ColumnForTasks(
+                        columnName: 'Doing',
+                        tasks: cols['secondColumn'],
+                        columnColor: Colors.pink[50],
+                      ),
+                    );
+                  },
+                  onWillAccept: (data) {
+                    print(data);
+                    return true;
+                  },
+                  onAccept: (data) {
+                    print("On Accept triggered");
+                    addTask(data: data, presentCol: 'secondColumn');
+                  },
+                ),
+                DragTarget<Task>(
+                  builder: (context, List data, List rejectedData) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blueGrey),
+                      ),
+                      child: ColumnForTasks(
+                        columnName: 'Review',
+                        tasks: cols['thirdColumn'],
+                        columnColor: Colors.blue[50],
+                      ),
+                    );
+                  },
+                  onWillAccept: (data) {
+                    print(data);
+                    return true;
+                  },
+                  onAccept: (data) {
+                    print("On Accept triggered");
+                    addTask(data: data, presentCol: 'thirdColumn');
+                  },
+                ),
+                DragTarget<Task>(
+                  builder: (context, List data, List rejectedData) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blueGrey),
+                      ),
+                      child: ColumnForTasks(
+                        columnName: 'Done',
+                        tasks: cols['fourthColumn'],
+                        columnColor: Colors.green[50],
+                      ),
+                    );
+                  },
+                  onWillAccept: (data) {
+                    print(data);
+                    return true;
+                  },
+                  onAccept: (data) {
+                    print("On Accept triggered");
+                    addTask(data: data, presentCol: 'fourthColumn');
+                  },
+                )
+              ],
+            ),
           ),
-          DragTarget<Task>(
-            builder: (context, List data, List rejectedData) {
-              return ColumnForTasks(tasks: cols['secondColumn']);
-            },
-            onWillAccept: (data) {
-              print(data);
-              return true;
-            },
-            onAccept: (data) {
-              print("On Accept triggered");
-              addTask(data: data, presentCol: 'secondColumn');
-            },
-          ),
-          DragTarget<Task>(
-            builder: (context, List data, List rejectedData) {
-              return ColumnForTasks(tasks: cols['thirdColumn']);
-            },
-            onWillAccept: (data) {
-              print(data);
-              return true;
-            },
-            onAccept: (data) {
-              print("On Accept triggered");
-              addTask(data: data, presentCol: 'thirdColumn');
-            },
-          ),
-          DragTarget<Task>(
-            builder: (context, List data, List rejectedData) {
-              return ColumnForTasks(tasks: cols['fourthColumn']);
-            },
-            onWillAccept: (data) {
-              print(data);
-              return true;
-            },
-            onAccept: (data) {
-              print("On Accept triggered");
-              addTask(data: data, presentCol: 'fourthColumn');
-            },
-          )
-        ],
+        ),
       ),
     );
   }
